@@ -97,7 +97,7 @@ export default class DaysView extends View {
       Array.from(this.dow.children).forEach((el, index) => {
         const dow = (this.weekStart + index) % 7;
         el.textContent = this.dayNames[dow];
-        el.className = this.daysOfWeekDisabled.includes(dow) ? 'dow disabled' : 'dow';
+        el.className = this.daysOfWeekDisabled.includes(dow) ? 'dow disabled text-center h-6 leading-6 text-sm font-medium text-gray-500 cursor-not-allowed' : 'dow text-center h-6 leading-6 text-sm font-medium text-gray-500';
       });
     }
   }
@@ -151,23 +151,23 @@ export default class DaysView extends View {
       const date = new Date(current);
       const day = date.getDay();
 
-      el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
+      el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm ${this.cellClass}`;
       el.dataset.date = current;
       el.textContent = date.getDate();
 
       if (current < this.first) {
-        classList.add('prev');
+        classList.add('prev', 'text-gray-500');
       } else if (current > this.last) {
-        classList.add('next');
+        classList.add('next', 'text-gray-500');
       }
       if (this.today === current) {
-        classList.add('today');
+        classList.add('today', 'bg-gray-100');
       }
       if (current < this.minDate || current > this.maxDate || this.disabled.includes(current)) {
-        classList.add('disabled');
+        classList.add('disabled', 'cursor-not-allowed');
       }
       if (this.daysOfWeekDisabled.includes(day)) {
-        classList.add('disabled');
+        classList.add('disabled', 'cursor-not-allowed');
         pushUnique(this.disabled, current);
       }
       if (this.daysOfWeekHighlighted.includes(day)) {
@@ -176,20 +176,21 @@ export default class DaysView extends View {
       if (this.range) {
         const [rangeStart, rangeEnd] = this.range;
         if (current > rangeStart && current < rangeEnd) {
-          classList.add('range');
+          classList.add('range', 'bg-gray-100');
         }
         if (current === rangeStart) {
-          classList.add('range-start');
+          classList.add('range-start', 'bg-gray-100');
         }
         if (current === rangeEnd) {
-          classList.add('range-end');
+          classList.add('range-end', 'bg-gray-100');
         }
       }
       if (this.selected.includes(current)) {
-        classList.add('selected');
+        classList.add('selected', 'bg-blue-700', 'text-white');
+        classList.remove('text-gray-900', 'hover:bg-gray-100');
       }
       if (current === this.focused) {
-        classList.add('focused');
+        classList.add('focused', 'bg-gray-100');
       }
 
       if (this.beforeShow) {
@@ -204,7 +205,8 @@ export default class DaysView extends View {
     this.grid
       .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
       .forEach((el) => {
-        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'focused');
+        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'focused', 'bg-gray-100');
+        el.classList.add('text-gray-900');
       });
     Array.from(this.grid.children).forEach((el) => {
       const current = Number(el.dataset.date);
@@ -219,10 +221,11 @@ export default class DaysView extends View {
         classList.add('range-end');
       }
       if (this.selected.includes(current)) {
-        classList.add('selected');
+        classList.add('selected', 'bg-blue-700', 'text-white');
+        classList.remove('text-gray-900', 'hover:bg-gray-100');
       }
       if (current === this.focused) {
-        classList.add('focused');
+        classList.add('focused', 'bg-gray-100');
       }
     });
   }
@@ -231,8 +234,8 @@ export default class DaysView extends View {
   refreshFocus() {
     const index = Math.round((this.focused - this.start) / 86400000);
     this.grid.querySelectorAll('.focused').forEach((el) => {
-      el.classList.remove('focused');
+      el.classList.remove('focused', 'bg-gray-100');
     });
-    this.grid.children[index].classList.add('focused');
+    this.grid.children[index].classList.add('focused', 'bg-gray-100');
   }
 }

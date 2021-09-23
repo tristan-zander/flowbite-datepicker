@@ -433,10 +433,10 @@ var Datepicker = (function () {
     maxNumberOfDates: 1,
     maxView: 3,
     minDate: null,
-    nextArrow: '»',
+    nextArrow: '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
     orientation: 'auto',
     pickLevel: 0,
-    prevArrow: '«',
+    prevArrow: '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>',
     showDaysOfWeek: true,
     showOnClick: true,
     showOnFocus: true,
@@ -761,15 +761,15 @@ var Datepicker = (function () {
   <div class="datepicker-picker inline-block rounded-lg bg-white shadow-lg p-4">
     <div class="datepicker-header">
       <div class="datepicker-title bg-white px-2 py-3 text-center font-semibold"></div>
-      <div class="datepicker-controls mb-3">
-        <button type="button" class="bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 text-lg py-1 px-3 focus:outline-none focus:ring-2 focus:ring-gray-200 prev-btn"></button>
-        <button type="button" class="text-sm text-gray-900 bg-white font-semibold hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 view-switch"></button>
-        <button type="button" class="bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 text-lg py-1 px-3 focus:outline-none focus:ring-2 focus:ring-gray-200 next-btn"></button>
+      <div class="datepicker-controls flex justify-between mb-2">
+        <button type="button" class="bg-white rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 text-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-gray-200 prev-btn"></button>
+        <button type="button" class="text-sm rounded-lg text-gray-900 bg-white font-semibold py-2.5 px-5 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 view-switch"></button>
+        <button type="button" class="bg-white rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 text-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-gray-200 next-btn"></button>
       </div>
     </div>
     <div class="datepicker-main p-1"></div>
     <div class="datepicker-footer">
-      <div class="datepicker-controls">
+      <div class="datepicker-controls flex">
         <button type="button" class="%buttonClass% today-btn"></button>
         <button type="button" class="%buttonClass% clear-btn"></button>
       </div>
@@ -778,7 +778,7 @@ var Datepicker = (function () {
 </div>`);
 
   const daysTemplate = optimizeTemplateHTML(`<div class="days">
-  <div class="days-of-week grid grid-cols-7">${createTagRepeat('span', 7, {class: 'dow block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'})}</div>
+  <div class="days-of-week grid grid-cols-7 mb-1">${createTagRepeat('span', 7, {class: 'dow block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'})}</div>
   <div class="datepicker-grid w-64 grid grid-cols-7">${createTagRepeat('span', 42 , {class: 'block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm h-6 leading-6 text-sm font-medium text-gray-500'})}</div>
 </div>`);
 
@@ -931,7 +931,7 @@ var Datepicker = (function () {
         Array.from(this.dow.children).forEach((el, index) => {
           const dow = (this.weekStart + index) % 7;
           el.textContent = this.dayNames[dow];
-          el.className = this.daysOfWeekDisabled.includes(dow) ? 'dow disabled' : 'dow';
+          el.className = this.daysOfWeekDisabled.includes(dow) ? 'dow disabled text-center h-6 leading-6 text-sm font-medium text-gray-500 cursor-not-allowed' : 'dow text-center h-6 leading-6 text-sm font-medium text-gray-500';
         });
       }
     }
@@ -985,23 +985,23 @@ var Datepicker = (function () {
         const date = new Date(current);
         const day = date.getDay();
 
-        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
+        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm ${this.cellClass}`;
         el.dataset.date = current;
         el.textContent = date.getDate();
 
         if (current < this.first) {
-          classList.add('prev');
+          classList.add('prev', 'text-gray-500');
         } else if (current > this.last) {
-          classList.add('next');
+          classList.add('next', 'text-gray-500');
         }
         if (this.today === current) {
-          classList.add('today');
+          classList.add('today', 'bg-gray-100');
         }
         if (current < this.minDate || current > this.maxDate || this.disabled.includes(current)) {
-          classList.add('disabled');
+          classList.add('disabled', 'cursor-not-allowed');
         }
         if (this.daysOfWeekDisabled.includes(day)) {
-          classList.add('disabled');
+          classList.add('disabled', 'cursor-not-allowed');
           pushUnique(this.disabled, current);
         }
         if (this.daysOfWeekHighlighted.includes(day)) {
@@ -1010,20 +1010,21 @@ var Datepicker = (function () {
         if (this.range) {
           const [rangeStart, rangeEnd] = this.range;
           if (current > rangeStart && current < rangeEnd) {
-            classList.add('range');
+            classList.add('range', 'bg-gray-100');
           }
           if (current === rangeStart) {
-            classList.add('range-start');
+            classList.add('range-start', 'bg-gray-100');
           }
           if (current === rangeEnd) {
-            classList.add('range-end');
+            classList.add('range-end', 'bg-gray-100');
           }
         }
         if (this.selected.includes(current)) {
-          classList.add('selected');
+          classList.add('selected', 'bg-blue-700', 'text-white');
+          classList.remove('text-gray-900', 'hover:bg-gray-100');
         }
         if (current === this.focused) {
-          classList.add('focused');
+          classList.add('focused', 'bg-gray-100');
         }
 
         if (this.beforeShow) {
@@ -1038,7 +1039,8 @@ var Datepicker = (function () {
       this.grid
         .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
         .forEach((el) => {
-          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'focused');
+          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'focused', 'bg-gray-100');
+          el.classList.add('text-gray-900');
         });
       Array.from(this.grid.children).forEach((el) => {
         const current = Number(el.dataset.date);
@@ -1053,10 +1055,11 @@ var Datepicker = (function () {
           classList.add('range-end');
         }
         if (this.selected.includes(current)) {
-          classList.add('selected');
+          classList.add('selected', 'bg-blue-700', 'text-white');
+          classList.remove('text-gray-900', 'hover:bg-gray-100');
         }
         if (current === this.focused) {
-          classList.add('focused');
+          classList.add('focused', 'bg-gray-100');
         }
       });
     }
@@ -1065,9 +1068,9 @@ var Datepicker = (function () {
     refreshFocus() {
       const index = Math.round((this.focused - this.start) / 86400000);
       this.grid.querySelectorAll('.focused').forEach((el) => {
-        el.classList.remove('focused');
+        el.classList.remove('focused', 'bg-gray-100');
       });
-      this.grid.children[index].classList.add('focused');
+      this.grid.children[index].classList.add('focused', 'bg-gray-100');
     }
   }
 
@@ -1098,7 +1101,7 @@ var Datepicker = (function () {
     init(options, onConstruction = true) {
       if (onConstruction) {
         this.grid = this.element;
-        this.element.classList.add('months', 'datepicker-grid');
+        this.element.classList.add('months', 'datepicker-grid', 'w-64', 'grid', 'grid-cols-4');
         this.grid.appendChild(parseHTML(createTagRepeat('span', 12, {'data-month': ix => ix})));
       }
       super.init(options);
@@ -1184,7 +1187,7 @@ var Datepicker = (function () {
         const classList = el.classList;
         const date = dateValue(this.year, index, 1);
 
-        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
+        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm ${this.cellClass}`;
         if (this.isMinView) {
           el.dataset.date = date;
         }
@@ -1212,10 +1215,11 @@ var Datepicker = (function () {
           }
         }
         if (selected.includes(index)) {
-          classList.add('selected');
+          classList.add('selected', 'bg-blue-700', 'text-white');
+          classList.remove('text-gray-900', 'hover:bg-gray-100');
         }
         if (index === this.focused) {
-          classList.add('focused');
+          classList.add('focused', 'bg-gray-100');
         }
 
         if (this.beforeShow) {
@@ -1231,7 +1235,8 @@ var Datepicker = (function () {
       this.grid
         .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
         .forEach((el) => {
-          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'focused');
+          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'focused', 'bg-gray-100');
+          el.classList.add('text-gray-900', 'hover:bg-gray-100');
         });
       Array.from(this.grid.children).forEach((el, index) => {
         const classList = el.classList;
@@ -1245,10 +1250,11 @@ var Datepicker = (function () {
           classList.add('range-end');
         }
         if (selected.includes(index)) {
-          classList.add('selected');
+          classList.add('selected', 'bg-blue-700', 'text-white');
+          classList.remove('text-gray-900', 'hover:bg-gray-100');
         }
         if (index === this.focused) {
-          classList.add('focused');
+          classList.add('focused', 'bg-gray-100');
         }
       });
     }
@@ -1256,9 +1262,9 @@ var Datepicker = (function () {
     // Update the view UI by applying the change of focused item
     refreshFocus() {
       this.grid.querySelectorAll('.focused').forEach((el) => {
-        el.classList.remove('focused');
+        el.classList.remove('focused', 'bg-gray-100');
       });
-      this.grid.children[this.focused].classList.add('focused');
+      this.grid.children[this.focused].classList.add('focused', 'bg-gray-100');
     }
   }
 
@@ -1277,7 +1283,7 @@ var Datepicker = (function () {
         this.navStep = this.step * 10;
         this.beforeShowOption = `beforeShow${toTitleCase(this.cellClass)}`;
         this.grid = this.element;
-        this.element.classList.add(this.name, 'datepicker-grid');
+        this.element.classList.add(this.name, 'datepicker-grid', 'w-64', 'grid', 'grid-cols-4');
         this.grid.appendChild(parseHTML(createTagRepeat('span', 12)));
       }
       super.init(options);
@@ -1348,7 +1354,7 @@ var Datepicker = (function () {
         const current = this.start + (index * this.step);
         const date = dateValue(current, 0, 1);
 
-        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
+        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm ${this.cellClass}`;
         if (this.isMinView) {
           el.dataset.date = date;
         }
@@ -1375,10 +1381,11 @@ var Datepicker = (function () {
           }
         }
         if (this.selected.includes(current)) {
-          classList.add('selected');
+          classList.add('selected', 'bg-blue-700', 'text-white');
+          classList.remove('text-gray-900', 'hover:bg-gray-100');
         }
         if (current === this.focused) {
-          classList.add('focused');
+          classList.add('focused', 'bg-gray-100');
         }
 
         if (this.beforeShow) {
@@ -1393,7 +1400,7 @@ var Datepicker = (function () {
       this.grid
         .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
         .forEach((el) => {
-          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'focused');
+          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'focused', 'bg-gray-100');
         });
       Array.from(this.grid.children).forEach((el) => {
         const current = Number(el.textContent);
@@ -1408,10 +1415,11 @@ var Datepicker = (function () {
           classList.add('range-end');
         }
         if (this.selected.includes(current)) {
-          classList.add('selected');
+          classList.add('selected', 'bg-blue-700', 'text-white');
+          classList.remove('text-gray-900', 'hover:bg-gray-100');
         }
         if (current === this.focused) {
-          classList.add('focused');
+          classList.add('focused', 'bg-gray-100');
         }
       });
     }
@@ -1420,9 +1428,9 @@ var Datepicker = (function () {
     refreshFocus() {
       const index = Math.round((this.focused - this.start) / this.step);
       this.grid.querySelectorAll('.focused').forEach((el) => {
-        el.classList.remove('focused');
+        el.classList.remove('focused', 'bg-gray-100');
       });
-      this.grid.children[index].classList.add('focused');
+      this.grid.children[index].classList.add('focused', 'bg-gray-100');
     }
   }
 
