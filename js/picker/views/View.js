@@ -6,7 +6,7 @@ export default class View {
   constructor(picker, config) {
     Object.assign(this, config, {
       picker,
-      element: parseHTML(`<div class="datepicker-view"></div>`).firstChild,
+      element: parseHTML(`<div class="datepicker-view flex"></div>`).firstChild,
       selected: [],
     });
     this.init(this.picker.datepicker.config);

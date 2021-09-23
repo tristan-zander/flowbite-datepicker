@@ -757,17 +757,17 @@ var Datepicker = (function () {
     return config;
   }
 
-  const pickerTemplate = optimizeTemplateHTML(`<div class="datepicker">
-  <div class="datepicker-picker">
+  const pickerTemplate = optimizeTemplateHTML(`<div class="datepicker hidden">
+  <div class="datepicker-picker inline-block rounded-lg bg-white shadow-lg p-4">
     <div class="datepicker-header">
-      <div class="datepicker-title"></div>
-      <div class="datepicker-controls">
-        <button type="button" class="%buttonClass% prev-btn"></button>
-        <button type="button" class="%buttonClass% view-switch"></button>
-        <button type="button" class="%buttonClass% next-btn"></button>
+      <div class="datepicker-title bg-white px-2 py-3 text-center font-semibold"></div>
+      <div class="datepicker-controls mb-3">
+        <button type="button" class="bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 text-lg py-1 px-3 focus:outline-none focus:ring-2 focus:ring-gray-200 prev-btn"></button>
+        <button type="button" class="text-sm text-gray-900 bg-white font-semibold hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 view-switch"></button>
+        <button type="button" class="bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 text-lg py-1 px-3 focus:outline-none focus:ring-2 focus:ring-gray-200 next-btn"></button>
       </div>
     </div>
-    <div class="datepicker-main"></div>
+    <div class="datepicker-main p-1"></div>
     <div class="datepicker-footer">
       <div class="datepicker-controls">
         <button type="button" class="%buttonClass% today-btn"></button>
@@ -778,13 +778,13 @@ var Datepicker = (function () {
 </div>`);
 
   const daysTemplate = optimizeTemplateHTML(`<div class="days">
-  <div class="days-of-week">${createTagRepeat('span', 7, {class: 'dow'})}</div>
-  <div class="datepicker-grid">${createTagRepeat('span', 42)}</div>
+  <div class="days-of-week grid grid-cols-7">${createTagRepeat('span', 7, {class: 'dow block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'})}</div>
+  <div class="datepicker-grid w-64 grid grid-cols-7">${createTagRepeat('span', 42 , {class: 'block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm h-6 leading-6 text-sm font-medium text-gray-500'})}</div>
 </div>`);
 
   const calendarWeeksTemplate = optimizeTemplateHTML(`<div class="calendar-weeks">
-  <div class="days-of-week"><span class="dow"></span></div>
-  <div class="weeks">${createTagRepeat('span', 6, {class: 'week'})}</div>
+  <div class="days-of-week flex"><span class="dow h-6 leading-6 text-sm font-medium text-gray-500"></span></div>
+  <div class="weeks">${createTagRepeat('span', 6, {class: 'week block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'})}</div>
 </div>`);
 
   // Base class of the view classes
@@ -792,7 +792,7 @@ var Datepicker = (function () {
     constructor(picker, config) {
       Object.assign(this, config, {
         picker,
-        element: parseHTML(`<div class="datepicker-view"></div>`).firstChild,
+        element: parseHTML(`<div class="datepicker-view flex"></div>`).firstChild,
         selected: [],
       });
       this.init(this.picker.datepicker.config);
@@ -985,7 +985,7 @@ var Datepicker = (function () {
         const date = new Date(current);
         const day = date.getDay();
 
-        el.className = `datepicker-cell ${this.cellClass}`;
+        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
         el.dataset.date = current;
         el.textContent = date.getDate();
 
@@ -1184,7 +1184,7 @@ var Datepicker = (function () {
         const classList = el.classList;
         const date = dateValue(this.year, index, 1);
 
-        el.className = `datepicker-cell ${this.cellClass}`;
+        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
         if (this.isMinView) {
           el.dataset.date = date;
         }
@@ -1348,7 +1348,7 @@ var Datepicker = (function () {
         const current = this.start + (index * this.step);
         const date = dateValue(current, 0, 1);
 
-        el.className = `datepicker-cell ${this.cellClass}`;
+        el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
         if (this.isMinView) {
           el.dataset.date = date;
         }
@@ -1652,6 +1652,7 @@ var Datepicker = (function () {
 
       const elementClass = datepicker.inline ? 'inline' : 'dropdown';
       element.classList.add(`datepicker-${elementClass}`);
+      elementClass === 'dropdown' ? element.classList.add('dropdown', 'absolute', 'top-0', 'left-0', 'z-20', 'pt-2') : null;
 
       processPickerOptions(this, datepicker.config);
       this.viewDate = computeResetViewDate(datepicker);
@@ -1697,7 +1698,8 @@ var Datepicker = (function () {
       if (this.active) {
         return;
       }
-      this.element.classList.add('active');
+      this.element.classList.add('active', 'block');
+      this.element.classList.remove('hidden');
       this.active = true;
 
       const datepicker = this.datepicker;
@@ -1723,7 +1725,8 @@ var Datepicker = (function () {
         return;
       }
       this.datepicker.exitEditMode();
-      this.element.classList.remove('active');
+      this.element.classList.remove('active', 'block');
+      this.element.classList.add('active', 'block', 'hidden');
       this.active = false;
       triggerDatepickerEvent(this.datepicker, 'hide');
     }
@@ -2520,7 +2523,7 @@ var Datepicker = (function () {
         return;
       }
       this.editMode = true;
-      this.inputField.classList.add('in-edit');
+      this.inputField.classList.add('in-edit', 'border-blue-700');
     }
 
     /**
@@ -2537,7 +2540,7 @@ var Datepicker = (function () {
       }
       const opts = Object.assign({update: false}, options);
       delete this.editMode;
-      this.inputField.classList.remove('in-edit');
+      this.inputField.classList.remove('in-edit', 'border-blue-700');
       if (opts.update) {
         this.update(opts);
       }
@@ -2546,4 +2549,4 @@ var Datepicker = (function () {
 
   return Datepicker;
 
-}());
+})();

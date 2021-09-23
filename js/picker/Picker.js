@@ -130,6 +130,7 @@ export default class Picker {
 
     const elementClass = datepicker.inline ? 'inline' : 'dropdown';
     element.classList.add(`datepicker-${elementClass}`);
+    elementClass === 'dropdown' ? element.classList.add('dropdown', 'absolute', 'top-0', 'left-0', 'z-20', 'pt-2') : null;
 
     processPickerOptions(this, datepicker.config);
     this.viewDate = computeResetViewDate(datepicker);
@@ -175,7 +176,8 @@ export default class Picker {
     if (this.active) {
       return;
     }
-    this.element.classList.add('active');
+    this.element.classList.add('active', 'block');
+    this.element.classList.remove('hidden');
     this.active = true;
 
     const datepicker = this.datepicker;
@@ -201,7 +203,8 @@ export default class Picker {
       return;
     }
     this.datepicker.exitEditMode();
-    this.element.classList.remove('active');
+    this.element.classList.remove('active', 'block');
+    this.element.classList.add('active', 'block', 'hidden');
     this.active = false;
     triggerDatepickerEvent(this.datepicker, 'hide');
   }

@@ -89,7 +89,7 @@ export default class YearsView extends View {
       const current = this.start + (index * this.step);
       const date = dateValue(current, 0, 1);
 
-      el.className = `datepicker-cell ${this.cellClass}`;
+      el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
       if (this.isMinView) {
         el.dataset.date = date;
       }

@@ -244,7 +244,7 @@ describe('Datepicker', function () {
       dp = new Datepicker(input);
       dpElem = document.querySelector('.datepicker');
       dp.picker.active = true;
-      dpElem.classList.add('active');
+      dpElem.classList.add('active', 'block');
 
       dp.hide();
     });

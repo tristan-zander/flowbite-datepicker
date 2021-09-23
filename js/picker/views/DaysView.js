@@ -151,7 +151,7 @@ export default class DaysView extends View {
       const date = new Date(current);
       const day = date.getDay();
 
-      el.className = `datepicker-cell ${this.cellClass}`;
+      el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm; ${this.cellClass}`;
       el.dataset.date = current;
       el.textContent = date.getDate();
 
