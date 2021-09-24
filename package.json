@@ -1,7 +1,7 @@
 {
-  "name": "vanillajs-datepicker",
-  "version": "1.1.4",
-  "description": "A vanilla JavaScript remake of bootstrap-datepicker for Bulma and other CSS frameworks",
+  "name": "@themesberg/tailwind-datepicker",
+  "version": "1.0.1",
+  "description": "A Tailwind CSS powered datepicker built with vanilla JavaScript.",
   "module": "js/main.js",
   "exports": {
     ".": "./js/main.js",
@@ -10,6 +10,11 @@
     "./locales/*": "./js/i18n/locales/*.js",
     "./locales/": "./js/i18n/locales/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themesberg/tailwind-datepicker"
+  },
+  "homepage": "https://flowbite.com/docs/plugins/datepicker/",
   "scripts": {
     "build:js": "rollup -c",
     "build:locales": "node scripts/build-locales.js",
@@ -20,27 +25,16 @@
     "make": "npm run build && npm run minify",
     "test:lib": "mocha -r esm test/unit/lib",
     "test:unit": "mocha -r esm test/unit",
-    "test": "npm run test:lib && npm run test:unit",
-    "docsify": "docsify serve docs"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mymth/vanillajs-datepicker.git"
+    "test": "npm run test:lib && npm run test:unit"
   },
   "keywords": [
     "datepicker",
-    "bulma",
-    "bootstrap",
+    "tailwind",
     "vanilla",
-    "javascript",
-    "scss"
+    "javascript"
   ],
-  "author": "Hidenao Miyamoto",
+  "author": "Flowbite & Hidenao Miyamoto",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mymth/vanillajs-datepicker/issues"
-  },
-  "homepage": "https://github.com/mymth/vanillajs-datepicker#readme",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^11.0.1",
     "autoprefixer": "^9.8.6",

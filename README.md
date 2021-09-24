@@ -1,31 +1,61 @@
-# Vanilla JS Datepicker
+# Tailwind CSS Datepicker
 
-A vanilla JavaScript remake of [bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker) for [Bulma](https://bulma.io) and other CSS frameworks  
+This project is a free and open source datepicker library which uses the utility-first classes from Tailwind and the JavaScript from another open source library called [Vanilla JS Datepicker](https://github.com/mymth/vanillajs-datepicker).
 
-This package is written from scratch as ECMAScript modules/[Sass](https://sass-lang.com) stylesheets to reproduce similar usability to bootstrap-datepicker.  
-It can work either standalone or with CSS framework (e.g. [Bootstrap](https://getbootstrap.com), [Foundation](https://get.foundation)), but works best with [Bulma](https://bulma.io) as it's developed primarily for Bulma. 
+This [Tailwind CSS Datepicker](https://flowbite.com/docs/plugins/datepicker/) is part of a larger library of components and interactive elements called Flowbite. Although it can also be used independently from the main library, we encourage you to check out the whole [Tailwind components library from Flowbite](https://flowbite.com/docs/getting-started/introduction/).
 
-The package also includes pre-built js/css files for those who like to use it directly on browser.
+<a href="https://flowbite.com/docs/plugins/datepicker/">
+  <img src="https://flowbite.s3.amazonaws.com/datepicker-presentation.gif">
+</a> 
 
-### Features
+## Getting started
 
-- Date picker (input-dropdown, inline), date range picker
-- Keyboard operation support (navigation by arrow keys, editing on input field)
-- i18n support (locales, CSS-based text direction detection)
-- Easily customizable to adapt stylesheet for various CSS frameworks
-- Dependency free
-- Made for modern browsers — no IE support
-- Lightweight (well, relatively…) — 33kB (minified, uncompressed)
+If you want to use the **Tailwind Datepicker** plugin using JavaScript you will need to include it into your project via NPM:
 
-### Demo
+```bash
+npm i @themesberg/tailwind-datepicker --save
+```
 
-[Live Online Demo](https://raw.githack.com/mymth/vanillajs-datepicker/v1.1.4/demo/)
+After you've installed the NPM library, you will need to import the `Datepicker` module:
 
-### Documentation
+```javascript
+import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
+```
 
-[Online Docs](https://mymth.github.io/vanillajs-datepicker)
+Initialize a new element using the `Datepicker` constructor and optionally add custom options based on your needs:
 
+```javascript
+const datepickerEl = document.getElementById('datepickerId');
+new Datepicker(datepickerEl, {
+    // options
+}); 
+```
+
+If you want to use the **Tailwind Date Range Picker** you have to import the `DateRangePicker` module:
+
+```javascript
+import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
+```
+
+Then in the same fashion you can initalize a date range picker component by using the `DateRangePicker` constructor:
+
+```javascript
+const dateRangePickerEl = document.getElementById('dateRangePickerId');
+new DateRangePicker(datepickerEl, {
+    // options
+}); 
+```
+
+## Documentation
+
+Check out the official [Tailwind CSS Datepicker Documentation](https://flowbite.com/docs/plugins/datepicker/) page to learn how to get started by installing and then using this library in your project.
+
+## Upgrade to pro
+
+There is also a pro version of FlowBite available featuring more components, an application UI layout, marketing UI pages, e-commerce pages and also Figma design files.
+
+Check it out here: [flowbite.com](https://flowbite.com)
 
 ## License
 
-- [MIT](./LICENSE)
+The Tailwind CSS Datepicker is open-source under the MIT License. Find out more by [clicking here](https://flowbite.com/docs/getting-started/license/).

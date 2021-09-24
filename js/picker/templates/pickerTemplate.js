@@ -12,9 +12,9 @@ const pickerTemplate = optimizeTemplateHTML(`<div class="datepicker hidden">
     </div>
     <div class="datepicker-main p-1"></div>
     <div class="datepicker-footer">
-      <div class="datepicker-controls flex">
-        <button type="button" class="%buttonClass% today-btn"></button>
-        <button type="button" class="%buttonClass% clear-btn"></button>
+      <div class="datepicker-controls flex space-x-2 mt-2">
+        <button type="button" class="%buttonClass% today-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center w-1/2"></button>
+        <button type="button" class="%buttonClass% clear-btn text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center w-1/2"></button>
       </div>
     </div>
   </div>
