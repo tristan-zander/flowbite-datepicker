@@ -758,7 +758,7 @@
   }
 
   const pickerTemplate = optimizeTemplateHTML(`<div class="datepicker hidden">
-  <div class="datepicker-picker inline-block rounded-lg bg-white dark:bg-gray-700 shadow-lg dark:shadow-sm-light p-4">
+  <div class="datepicker-picker inline-block rounded-lg bg-white dark:bg-gray-700 shadow-lg p-4">
     <div class="datepicker-header">
       <div class="datepicker-title bg-white dark:bg-gray-700 px-2 py-3 text-center font-semibold"></div>
       <div class="datepicker-controls flex justify-between mb-2">
