@@ -116,7 +116,7 @@ export default class MonthsView extends View {
       const classList = el.classList;
       const date = dateValue(this.year, index, 1);
 
-      el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm ${this.cellClass}`;
+      el.className = `datepicker-cell hover:bg-gray-100 dark:hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 dark:text-white font-semibold text-sm ${this.cellClass}`;
       if (this.isMinView) {
         el.dataset.date = date;
       }
@@ -144,11 +144,11 @@ export default class MonthsView extends View {
         }
       }
       if (selected.includes(index)) {
-        classList.add('selected', 'bg-blue-700', 'text-white');
-        classList.remove('text-gray-900', 'hover:bg-gray-100');
+        classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
+        classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (index === this.focused) {
-        classList.add('focused', 'bg-gray-100');
+        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
       }
 
       if (this.beforeShow) {
@@ -164,8 +164,8 @@ export default class MonthsView extends View {
     this.grid
       .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
       .forEach((el) => {
-        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'focused', 'bg-gray-100');
-        el.classList.add('text-gray-900', 'hover:bg-gray-100');
+        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'dark:bg-blue-600', 'dark:text-white', 'text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+        el.classList.add('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       });
     Array.from(this.grid.children).forEach((el, index) => {
       const classList = el.classList;
@@ -179,11 +179,11 @@ export default class MonthsView extends View {
         classList.add('range-end');
       }
       if (selected.includes(index)) {
-        classList.add('selected', 'bg-blue-700', 'text-white');
-        classList.remove('text-gray-900', 'hover:bg-gray-100');
+        classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
+        classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (index === this.focused) {
-        classList.add('focused', 'bg-gray-100');
+        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
       }
     });
   }
@@ -191,8 +191,8 @@ export default class MonthsView extends View {
   // Update the view UI by applying the change of focused item
   refreshFocus() {
     this.grid.querySelectorAll('.focused').forEach((el) => {
-      el.classList.remove('focused', 'bg-gray-100');
+      el.classList.remove('focused', 'bg-gray-100'), 'dark:bg-gray-600';
     });
-    this.grid.children[this.focused].classList.add('focused', 'bg-gray-100');
+    this.grid.children[this.focused].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
   }
 }

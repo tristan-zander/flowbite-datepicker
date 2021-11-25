@@ -97,7 +97,7 @@ export default class DaysView extends View {
       Array.from(this.dow.children).forEach((el, index) => {
         const dow = (this.weekStart + index) % 7;
         el.textContent = this.dayNames[dow];
-        el.className = this.daysOfWeekDisabled.includes(dow) ? 'dow disabled text-center h-6 leading-6 text-sm font-medium text-gray-500 cursor-not-allowed' : 'dow text-center h-6 leading-6 text-sm font-medium text-gray-500';
+        el.className = this.daysOfWeekDisabled.includes(dow) ? 'dow disabled text-center h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400 cursor-not-allowed' : 'dow text-center h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400';
       });
     }
   }
@@ -151,17 +151,17 @@ export default class DaysView extends View {
       const date = new Date(current);
       const day = date.getDay();
 
-      el.className = `datepicker-cell hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm ${this.cellClass}`;
+      el.className = `datepicker-cell hover:bg-gray-100 dark:hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 dark:text-white font-semibold text-sm ${this.cellClass}`;
       el.dataset.date = current;
       el.textContent = date.getDate();
 
       if (current < this.first) {
-        classList.add('prev', 'text-gray-500');
+        classList.add('prev', 'text-gray-500', 'dark:text-white');
       } else if (current > this.last) {
-        classList.add('next', 'text-gray-500');
+        classList.add('next', 'text-gray-500', 'dark:text-white');
       }
       if (this.today === current) {
-        classList.add('today', 'bg-gray-100');
+        classList.add('today', 'bg-gray-100', 'dark:bg-gray-600', 'dark:bg-gray-600');
       }
       if (current < this.minDate || current > this.maxDate || this.disabled.includes(current)) {
         classList.add('disabled', 'cursor-not-allowed');
@@ -176,21 +176,21 @@ export default class DaysView extends View {
       if (this.range) {
         const [rangeStart, rangeEnd] = this.range;
         if (current > rangeStart && current < rangeEnd) {
-          classList.add('range', 'bg-gray-200');
+          classList.add('range', 'bg-gray-200', 'dark:bg-gray-600');
           classList.remove('rounded-lg', 'rounded-l-lg', 'rounded-r-lg')
         }
         if (current === rangeStart) {
-          classList.add('range-start', 'bg-gray-100', 'rounded-l-lg');
+          classList.add('range-start', 'bg-gray-100', 'dark:bg-gray-600', 'rounded-l-lg');
           classList.remove('rounded-lg', 'rounded-r-lg');
         }
         if (current === rangeEnd) {
-          classList.add('range-end', 'bg-gray-100', 'rounded-r-lg');
+          classList.add('range-end', 'bg-gray-100', 'dark:bg-gray-600', 'rounded-r-lg');
           classList.remove('rounded-lg', 'rounded-l-lg');
         }
       }
       if (this.selected.includes(current)) {
-        classList.add('selected', 'bg-blue-700', 'text-white');
-        classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100');
+        classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
+        classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (current === this.focused) {
         classList.add('focused');
@@ -208,30 +208,30 @@ export default class DaysView extends View {
     this.grid
       .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
       .forEach((el) => {
-        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'focused', 'bg-gray-100');
-        el.classList.add('text-gray-900', 'rounded-lg');
+        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+        el.classList.add('text-gray-900', 'rounded-lg', 'dark:text-white');
       });
     Array.from(this.grid.children).forEach((el) => {
       const current = Number(el.dataset.date);
       const classList = el.classList;
       if (current > rangeStart && current < rangeEnd) {
-        classList.add('range', 'bg-gray-200');
+        classList.add('range', 'bg-gray-200', 'dark:bg-gray-600');
         classList.remove('rounded-lg');
       }
       if (current === rangeStart) {
-        classList.add('range-start', 'bg-gray-200', 'rounded-l-lg');
+        classList.add('range-start', 'bg-gray-200', 'dark:bg-gray-600', 'rounded-l-lg');
         classList.remove('rounded-lg', 'rounded-r-lg');
       }
       if (current === rangeEnd) {
-        classList.add('range-end', 'bg-gray-200', 'rounded-r-lg');
+        classList.add('range-end', 'bg-gray-200', 'dark:bg-gray-600', 'rounded-r-lg');
         classList.remove('rounded-lg', 'rounded-l-lg');
       }
       if (this.selected.includes(current)) {
-        classList.add('selected', 'bg-blue-700', 'text-white');
-        classList.remove('text-gray-900', 'hover:bg-gray-100');
+        classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
+        classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (current === this.focused) {
-        classList.add('focused', 'bg-gray-100');
+        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
       }
     });
   }
@@ -240,8 +240,8 @@ export default class DaysView extends View {
   refreshFocus() {
     const index = Math.round((this.focused - this.start) / 86400000);
     this.grid.querySelectorAll('.focused').forEach((el) => {
-      el.classList.remove('focused', 'bg-gray-100');
+      el.classList.remove('focused', 'bg-gray-100', 'dark:bg-gray-600');
     });
-    this.grid.children[index].classList.add('focused', 'bg-gray-100');
+    this.grid.children[index].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
   }
 }
