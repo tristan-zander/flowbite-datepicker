@@ -148,7 +148,7 @@ export default class MonthsView extends View {
         classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (index === this.focused) {
-        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+        classList.add('focused');
       }
 
       if (this.beforeShow) {
@@ -164,7 +164,7 @@ export default class MonthsView extends View {
     this.grid
       .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
       .forEach((el) => {
-        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'dark:bg-blue-600', 'dark:text-white', 'text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'dark:bg-blue-600', 'dark:text-white', 'text-white', 'focused');
         el.classList.add('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       });
     Array.from(this.grid.children).forEach((el, index) => {
@@ -183,7 +183,7 @@ export default class MonthsView extends View {
         classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (index === this.focused) {
-        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+        classList.add('focused');
       }
     });
   }
@@ -191,8 +191,8 @@ export default class MonthsView extends View {
   // Update the view UI by applying the change of focused item
   refreshFocus() {
     this.grid.querySelectorAll('.focused').forEach((el) => {
-      el.classList.remove('focused', 'bg-gray-100'), 'dark:bg-gray-600';
+      el.classList.remove('focused');
     });
-    this.grid.children[this.focused].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+    this.grid.children[this.focused].classList.add('focused');
   }
 }

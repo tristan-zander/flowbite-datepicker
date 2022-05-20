@@ -120,7 +120,7 @@ export default class YearsView extends View {
         classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (current === this.focused) {
-        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+        classList.add('focused');
       }
 
       if (this.beforeShow) {
@@ -135,7 +135,7 @@ export default class YearsView extends View {
     this.grid
       .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
       .forEach((el) => {
-        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused');
       });
     Array.from(this.grid.children).forEach((el) => {
       const current = Number(el.textContent);
@@ -154,7 +154,7 @@ export default class YearsView extends View {
         classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
       }
       if (current === this.focused) {
-        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+        classList.add('focused');
       }
     });
   }
@@ -163,8 +163,8 @@ export default class YearsView extends View {
   refreshFocus() {
     const index = Math.round((this.focused - this.start) / this.step);
     this.grid.querySelectorAll('.focused').forEach((el) => {
-      el.classList.remove('focused', 'bg-gray-100', 'dark:bg-gray-600');
+      el.classList.remove('focused');
     });
-    this.grid.children[index].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+    this.grid.children[index].classList.add('focused');
   }
 }

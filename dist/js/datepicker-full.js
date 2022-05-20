@@ -760,7 +760,7 @@
   const pickerTemplate = optimizeTemplateHTML(`<div class="datepicker hidden">
   <div class="datepicker-picker inline-block rounded-lg bg-white dark:bg-gray-700 shadow-lg p-4">
     <div class="datepicker-header">
-      <div class="datepicker-title bg-white dark:bg-gray-700 px-2 py-3 text-center font-semibold"></div>
+      <div class="datepicker-title bg-white dark:bg-gray-700 dark:text-white px-2 py-3 text-center font-semibold"></div>
       <div class="datepicker-controls flex justify-between mb-2">
         <button type="button" class="bg-white dark:bg-gray-700 rounded-lg text-gray-500 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white text-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-gray-200 prev-btn"></button>
         <button type="button" class="text-sm rounded-lg text-gray-900 dark:text-white bg-white dark:bg-gray-700 font-semibold py-2.5 px-5 hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-200 view-switch"></button>
@@ -771,7 +771,7 @@
     <div class="datepicker-footer">
       <div class="datepicker-controls flex space-x-2 mt-2">
         <button type="button" class="%buttonClass% today-btn text-white bg-blue-700 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center w-1/2"></button>
-        <button type="button" class="%buttonClass% clear-btn text-gray-900 dark:text-white bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center w-1/2"></button>
+        <button type="button" class="%buttonClass% clear-btn text-gray-900 dark:text-white bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center w-1/2"></button>
       </div>
     </div>
   </div>
@@ -1024,7 +1024,7 @@
         }
         if (this.selected.includes(current)) {
           classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-          classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+          classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'bg-gray-100', 'bg-gray-200');
         }
         if (current === this.focused) {
           classList.add('focused');
@@ -1042,12 +1042,13 @@
       this.grid
         .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
         .forEach((el) => {
-          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused');
           el.classList.add('text-gray-900', 'rounded-lg', 'dark:text-white');
         });
       Array.from(this.grid.children).forEach((el) => {
         const current = Number(el.dataset.date);
         const classList = el.classList;
+        classList.remove('bg-gray-200', 'dark:bg-gray-700', 'rounded-l-lg', 'rounded-r-lg');
         if (current > rangeStart && current < rangeEnd) {
           classList.add('range', 'bg-gray-200', 'dark:bg-gray-600');
           classList.remove('rounded-lg');
@@ -1062,10 +1063,10 @@
         }
         if (this.selected.includes(current)) {
           classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-          classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+          classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'bg-gray-100', 'bg-gray-200');
         }
         if (current === this.focused) {
-          classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+          classList.add('focused');
         }
       });
     }
@@ -1074,9 +1075,9 @@
     refreshFocus() {
       const index = Math.round((this.focused - this.start) / 86400000);
       this.grid.querySelectorAll('.focused').forEach((el) => {
-        el.classList.remove('focused', 'bg-gray-100', 'dark:bg-gray-600');
+        el.classList.remove('focused');
       });
-      this.grid.children[index].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+      this.grid.children[index].classList.add('focused');
     }
   }
 
@@ -1225,7 +1226,7 @@
           classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
         }
         if (index === this.focused) {
-          classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+          classList.add('focused');
         }
 
         if (this.beforeShow) {
@@ -1241,7 +1242,7 @@
       this.grid
         .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
         .forEach((el) => {
-          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'dark:bg-blue-600', 'dark:text-white', 'text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'dark:bg-blue-600', 'dark:text-white', 'text-white', 'focused');
           el.classList.add('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
         });
       Array.from(this.grid.children).forEach((el, index) => {
@@ -1260,7 +1261,7 @@
           classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
         }
         if (index === this.focused) {
-          classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+          classList.add('focused');
         }
       });
     }
@@ -1268,9 +1269,9 @@
     // Update the view UI by applying the change of focused item
     refreshFocus() {
       this.grid.querySelectorAll('.focused').forEach((el) => {
-        el.classList.remove('focused', 'bg-gray-100'), 'dark:bg-gray-600';
+        el.classList.remove('focused');
       });
-      this.grid.children[this.focused].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+      this.grid.children[this.focused].classList.add('focused');
     }
   }
 
@@ -1391,7 +1392,7 @@
           classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
         }
         if (current === this.focused) {
-          classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+          classList.add('focused');
         }
 
         if (this.beforeShow) {
@@ -1406,7 +1407,7 @@
       this.grid
         .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
         .forEach((el) => {
-          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+          el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused');
         });
       Array.from(this.grid.children).forEach((el) => {
         const current = Number(el.textContent);
@@ -1425,7 +1426,7 @@
           classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
         }
         if (current === this.focused) {
-          classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+          classList.add('focused');
         }
       });
     }
@@ -1434,9 +1435,9 @@
     refreshFocus() {
       const index = Math.round((this.focused - this.start) / this.step);
       this.grid.querySelectorAll('.focused').forEach((el) => {
-        el.classList.remove('focused', 'bg-gray-100', 'dark:bg-gray-600');
+        el.classList.remove('focused');
       });
-      this.grid.children[index].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+      this.grid.children[index].classList.add('focused');
     }
   }
 

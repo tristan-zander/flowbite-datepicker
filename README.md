@@ -13,13 +13,13 @@ This [Tailwind CSS Datepicker](https://flowbite.com/docs/plugins/datepicker/) is
 If you want to use the **Tailwind Datepicker** plugin using JavaScript you will need to include it into your project via NPM:
 
 ```bash
-npm i @themesberg/tailwind-datepicker --save
+npm i flowbite-datepicker --save
 ```
 
 After you've installed the NPM library, you will need to import the `Datepicker` module:
 
 ```javascript
-import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
+import Datepicker from 'flowbite-datepicker/Datepicker';
 ```
 
 Initialize a new element using the `Datepicker` constructor and optionally add custom options based on your needs:
@@ -34,7 +34,7 @@ new Datepicker(datepickerEl, {
 If you want to use the **Tailwind Date Range Picker** you have to import the `DateRangePicker` module:
 
 ```javascript
-import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
+import DateRangePicker from 'flowbite-datepicker/DateRangePicker';
 ```
 
 Then in the same fashion you can initalize a date range picker component by using the `DateRangePicker` constructor:

@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [],
+  content: ["./demo/**/*.html", "./js/**/*.js", "./docs/**/*.*"],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {},
@@ -8,6 +8,6 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('@themesberg/flowbite/plugin')
+    require('flowbite/plugin')
   ],
 }

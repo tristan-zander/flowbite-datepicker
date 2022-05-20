@@ -190,7 +190,7 @@ export default class DaysView extends View {
       }
       if (this.selected.includes(current)) {
         classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-        classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+        classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'bg-gray-100', 'bg-gray-200');
       }
       if (current === this.focused) {
         classList.add('focused');
@@ -208,12 +208,13 @@ export default class DaysView extends View {
     this.grid
       .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
       .forEach((el) => {
-        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+        el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused');
         el.classList.add('text-gray-900', 'rounded-lg', 'dark:text-white');
       });
     Array.from(this.grid.children).forEach((el) => {
       const current = Number(el.dataset.date);
       const classList = el.classList;
+      classList.remove('bg-gray-200', 'dark:bg-gray-700', 'rounded-l-lg', 'rounded-r-lg')
       if (current > rangeStart && current < rangeEnd) {
         classList.add('range', 'bg-gray-200', 'dark:bg-gray-600');
         classList.remove('rounded-lg');
@@ -228,10 +229,10 @@ export default class DaysView extends View {
       }
       if (this.selected.includes(current)) {
         classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-        classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+        classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'bg-gray-100', 'bg-gray-200');
       }
       if (current === this.focused) {
-        classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+        classList.add('focused');
       }
     });
   }
@@ -240,8 +241,8 @@ export default class DaysView extends View {
   refreshFocus() {
     const index = Math.round((this.focused - this.start) / 86400000);
     this.grid.querySelectorAll('.focused').forEach((el) => {
-      el.classList.remove('focused', 'bg-gray-100', 'dark:bg-gray-600');
+      el.classList.remove('focused');
     });
-    this.grid.children[index].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+    this.grid.children[index].classList.add('focused');
   }
 }
