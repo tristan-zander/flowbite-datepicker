@@ -995,7 +995,7 @@ var Datepicker = (function () {
           classList.add('next', 'text-gray-500', 'dark:text-white');
         }
         if (this.today === current) {
-          classList.add('today', 'bg-gray-100', 'dark:bg-gray-600', 'dark:bg-gray-600');
+          classList.add('today', 'bg-gray-100', 'dark:bg-gray-600');
         }
         if (current < this.minDate || current > this.maxDate || this.disabled.includes(current)) {
           classList.add('disabled', 'cursor-not-allowed');
@@ -1024,7 +1024,7 @@ var Datepicker = (function () {
         }
         if (this.selected.includes(current)) {
           classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-          classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'bg-gray-100', 'bg-gray-200');
+          classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'dark:bg-gray-600', 'bg-gray-100', 'bg-gray-200');
         }
         if (current === this.focused) {
           classList.add('focused');
@@ -1048,7 +1048,7 @@ var Datepicker = (function () {
       Array.from(this.grid.children).forEach((el) => {
         const current = Number(el.dataset.date);
         const classList = el.classList;
-        classList.remove('bg-gray-200', 'dark:bg-gray-700', 'rounded-l-lg', 'rounded-r-lg');
+        classList.remove('bg-gray-200', 'dark:bg-gray-600', 'rounded-l-lg', 'rounded-r-lg');
         if (current > rangeStart && current < rangeEnd) {
           classList.add('range', 'bg-gray-200', 'dark:bg-gray-600');
           classList.remove('rounded-lg');
@@ -1063,7 +1063,7 @@ var Datepicker = (function () {
         }
         if (this.selected.includes(current)) {
           classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-          classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'bg-gray-100', 'bg-gray-200');
+          classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600', 'bg-gray-100', 'bg-gray-200', 'dark:bg-gray-600');
         }
         if (current === this.focused) {
           classList.add('focused');
