@@ -1,4 +1,4 @@
-# Tailwind CSS Datepicker
+# Flowbite Datepicker - Built with Tailwind CSS
 
 This project is a free and open source datepicker library which uses the utility-first classes from Tailwind and the JavaScript from another open source library called Vanilla JS Datepicker.
 
