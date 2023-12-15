@@ -130,7 +130,7 @@ export default class Picker {
 
     const elementClass = datepicker.inline ? 'inline' : 'dropdown';
     element.classList.add(`datepicker-${elementClass}`);
-    elementClass === 'dropdown' ? element.classList.add('dropdown', 'absolute', 'top-0', 'left-0', 'z-40', 'pt-2') : null;
+    elementClass === 'dropdown' ? element.classList.add('dropdown', 'absolute', 'top-0', 'left-0', 'z-50', 'pt-2') : null;
 
     processPickerOptions(this, datepicker.config);
     this.viewDate = computeResetViewDate(datepicker);
