@@ -1057,11 +1057,11 @@ var Datepicker = (function () {
         }
         if (current === rangeStart) {
           classList.add('range-start', 'bg-gray-200', 'dark:bg-gray-600', 'rounded-l-lg');
-          classList.remove('rounded-lg', 'rounded-r-lg');
+          classList.remove('rounded-lg',);
         }
         if (current === rangeEnd) {
           classList.add('range-end', 'bg-gray-200', 'dark:bg-gray-600', 'rounded-r-lg');
-          classList.remove('rounded-lg', 'rounded-l-lg');
+          classList.remove('rounded-lg',);
         }
         if (this.selected.includes(current)) {
           classList.add('selected', 'bg-blue-700', '!bg-primary-700', 'text-white', 'dark:bg-blue-600', 'dark:!bg-primary-600', 'dark:text-white');
